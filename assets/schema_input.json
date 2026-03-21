@@ -7,27 +7,34 @@
     "items": {
         "type": "object",
         "properties": {
+            "subject": {
+                "type": "string",
+                "description": "Subject/patient identifier, used internally to perform sanity check when processing multiple groups",
+                "pattern": "^\\S+$",
+                "errorMessage": "subject must be provided and cannot contain spaces",
+                "meta": ["subject"]
+            },
             "sample": {
                 "type": "string",
                 "pattern": "^\\S+$",
                 "errorMessage": "Sample name must be provided and cannot contain spaces",
                 "meta": ["id"]
             },
-            "fastq_1": {
+            "bam": {
                 "type": "string",
                 "format": "file-path",
                 "exists": true,
-                "pattern": "^([\\S\\s]*\\/)?[^\\s\\/]+\\.f(ast)?q\\.gz$",
-                "errorMessage": "FastQ file for reads 1 must be provided, cannot contain spaces and must have extension '.fq.gz' or '.fastq.gz'"
+                "pattern": "^([\\S\\s]*\\/)?[^\\s\\/]+\\.bam$",
+                "errorMessage": "bam file must be provided, cannot contain spaces and must have extension '.bam'"
             },
-            "fastq_2": {
+            "bai": {
                 "type": "string",
                 "format": "file-path",
                 "exists": true,
-                "pattern": "^([\\S\\s]*\\/)?[^\\s\\/]+\\.f(ast)?q\\.gz$",
-                "errorMessage": "FastQ file for reads 2 cannot contain spaces and must have extension '.fq.gz' or '.fastq.gz'"
+                "pattern": "^([\\S\\s]*\\/)?[^\\s\\/]+\\.bai$",
+                "errorMessage": "bai file must be provided, cannot contain spaces and must have extension '.bai'"
             }
         },
-        "required": ["sample", "fastq_1"]
+        "required": ["sample", "bam", "bai"]
     }
 }
