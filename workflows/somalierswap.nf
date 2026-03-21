@@ -3,7 +3,7 @@
     IMPORT MODULES / SUBWORKFLOWS / FUNCTIONS
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 */
-include { SOMALIER_EXTRACT       } from '../modules/nf-core/somalier/extract/main'
+include { SOMALIER_EXTRACT       } from '../modules/local/somalier/extract/main'
 include { SOMALIER_RELATE        } from '../modules/nf-core/somalier/relate/main'
 include { MULTIQC                } from '../modules/nf-core/multiqc/main'
 include { paramsSummaryMap       } from 'plugin/nf-schema'
