@@ -14,6 +14,11 @@
                         "branch": "master",
                         "git_sha": "af27af1be706e6a2bb8fe454175b0cdf77f47b49",
                         "installed_by": ["modules"]
+                    },
+                    "somalier/relate": {
+                        "branch": "master",
+                        "git_sha": "7060b0e4af2ebdb22e26df8d0501fca1988f5095",
+                        "installed_by": ["modules"]
                     }
                 }
             },
