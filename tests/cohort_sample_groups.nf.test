@@ -1,0 +1,23 @@
+nextflow_pipeline {
+
+    name "Test pipeline with cohort and sample_groups"
+    script "../main.nf"
+    tag "pipeline"
+    tag "cohort"
+    tag "sample_groups"
+
+    test("-profile test --cohort --sample_groups") {
+
+        when {
+            params {
+                outdir = "$outputDir"
+                cohort = true
+                sample_groups = "${projectDir}/assets/groups.txt"
+            }
+        }
+
+        then {
+            assert workflow.success
+        }
+    }
+}

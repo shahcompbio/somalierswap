@@ -69,10 +69,6 @@
                     "type": "string",
                     "description": "Path to FASTA index"
                 },
-                "sites": {
-                    "type": "string",
-                    "description": "sites file in VCF format which can be taken from https://github.com/brentp/somalier"
-                },
                 "igenomes_ignore": {
                     "type": "boolean",
                     "description": "Do not load the iGenomes reference config.",
@@ -87,6 +83,26 @@
                     "fa_icon": "fas fa-ban",
                     "hidden": true,
                     "default": "s3://ngi-igenomes/igenomes/"
+                }
+            }
+        },
+        "somalier_options": {
+            "title": "Somalier options",
+            "type": "object",
+            "description": "",
+            "default": "",
+            "properties": {
+                "sites": {
+                    "type": "string",
+                    "description": "sites file in VCF format which can be taken from https://github.com/brentp/somalier"
+                },
+                "cohort": {
+                    "type": "boolean",
+                    "description": "perform sample swap analysis across entire cohort"
+                },
+                "sample_groups": {
+                    "type": "string",
+                    "description": "optional path to expected groups of samples such as tumor normal pairs specified as comma-separated groups per line"
                 }
             }
         },
@@ -254,6 +270,9 @@
         },
         {
             "$ref": "#/$defs/reference_genome_options"
+        },
+        {
+            "$ref": "#/$defs/somalier_options"
         },
         {
             "$ref": "#/$defs/institutional_config_options"

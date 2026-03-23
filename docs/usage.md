@@ -49,6 +49,32 @@ nextflow run shahcompbio/somalierswap \
 
 This will launch the pipeline with the `docker` configuration profile. See below for more information about profiles.
 
+### Cohort-level analysis
+
+By default, the pipeline groups samples by the `subject` column in the samplesheet and runs `somalier relate` within each subject group independently. To instead run relatedness analysis across all samples as a single cohort, use the `--cohort` flag:
+
+```bash
+nextflow run shahcompbio/somalierswap \
+    --input ./samplesheet.csv \
+    --outdir ./results \
+    --fasta /path/to/reference.fasta \
+    --fai /path/to/reference.fasta.fai \
+    --sites /path/to/somalier_sites.vcf.gz \
+    --cohort \
+    -profile docker
+```
+
+### Sample groups
+
+You can optionally provide a file of expected sample groups via `--sample_groups`. This tells `somalier relate` which samples are expected to be related (e.g. tumor-normal pairs), specified as comma-separated groups per line:
+
+```text
+normal1,tumor1a,tumor1b
+normal2,tumor2a
+```
+
+Each line defines a group of samples that are expected to belong together. See the [somalier documentation](https://github.com/brentp/somalier#somalier-relate) for more details.
+
 The `--sites` VCF file contains known polymorphic sites used by somalier for fingerprinting. Pre-built sites files for common reference genomes are available from the [somalier releases page](https://github.com/brentp/somalier/releases).
 
 Note that the pipeline will create the following files in your working directory:
@@ -97,7 +123,7 @@ nextflow pull shahcompbio/somalierswap
 
 It is a good idea to specify the pipeline version when running the pipeline on your data. This ensures that a specific version of the pipeline code and software are used when you run your pipeline. If you keep using the same tag, you'll be running the same version of the pipeline, even if there have been changes to the code since.
 
-First, go to the [shahcompbio/somalierswap releases page](https://github.com/shahcompbio/somalierswap/releases) and find the latest pipeline version - numeric only (eg. `1.0.0`). Then specify this when running the pipeline with `-r` (one hyphen) - eg. `-r 1.0.0`. Of course, you can switch to another version by changing the number after the `-r` flag.
+First, go to the [shahcompbio/somalierswap releases page](https://github.com/shahcompbio/somalierswap/releases) and find the latest pipeline version - numeric only (eg. `1.1.0`). Then specify this when running the pipeline with `-r` (one hyphen) - eg. `-r 1.1.0`. Of course, you can switch to another version by changing the number after the `-r` flag.
 
 This version number will be logged in reports when you run the pipeline, so that you'll know what you used when you look back in the future.
 

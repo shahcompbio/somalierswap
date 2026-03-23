@@ -1,0 +1,21 @@
+nextflow_pipeline {
+
+    name "Test pipeline with cohort"
+    script "../main.nf"
+    tag "pipeline"
+    tag "cohort"
+
+    test("-profile test --cohort") {
+
+        when {
+            params {
+                outdir = "$outputDir"
+                cohort = true
+            }
+        }
+
+        then {
+            assert workflow.success
+        }
+    }
+}

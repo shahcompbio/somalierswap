@@ -34,13 +34,26 @@ workflow SOMALIERSWAP {
         [[id: "ref"], params.fai],
         [[id: "sites"], params.sites],
     )
-    SOMALIER_EXTRACT.out.extract
-        .map { meta, extract -> tuple(meta.subject, meta, extract) }
-        .groupTuple()
-        .map { subject, _meta, extract -> [[id: subject], extract, []] }
-        .set { ch_relate }
+    if (!params.cohort) {
+        SOMALIER_EXTRACT.out.extract
+            .map { meta, extract -> tuple(meta.subject, meta, extract) }
+            .groupTuple()
+            .map { subject, _meta, extract -> [[id: subject], extract, []] }
+            .set { ch_relate }
+    }
+    else {
+        // perform cohort-level analysis
+        SOMALIER_EXTRACT.out.extract
+            .map { _meta, extract -> extract }
+            .toList()
+            .map { extract -> [[id: "cohort"], extract, []] }
+            .set { ch_relate }
+    }
     // relate samples
-    SOMALIER_RELATE(ch_relate, [])
+    SOMALIER_RELATE(
+        ch_relate,
+        params.sample_groups ?: [],
+    )
 
     ch_multiqc_files = ch_multiqc_files.mix(SOMALIER_RELATE.out.pairs_tsv.map { _meta, tsv -> tsv })
     ch_multiqc_files = ch_multiqc_files.mix(SOMALIER_RELATE.out.samples_tsv.map { _meta, tsv -> tsv })
