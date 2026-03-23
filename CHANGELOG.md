@@ -3,6 +3,14 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## v1.1.0 - 2026-03-23
+
+### `Added`
+
+- `--cohort` parameter for cohort-level analysis — runs `somalier relate` across all samples as a single cohort instead of grouping by subject
+- `--sample_groups` parameter to provide a tab-delimited groups file to `somalier relate`
+- nf-test pipeline tests for `--cohort` and `--cohort --sample_groups` configurations
+
 ## v1.0.0 - 2026-03-22
 
 Initial release of shahcompbio/somalierswap, created with the [nf-core](https://nf-co.re/) template.
