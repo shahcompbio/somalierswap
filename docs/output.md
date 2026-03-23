@@ -38,7 +38,7 @@ The pipeline is built using [Nextflow](https://www.nextflow.io/) and processes d
 
 </details>
 
-[somalier relate](https://github.com/brentp/somalier) computes pairwise relatedness (IBS0, IBS2, kinship coefficient) between all samples within each subject group. High kinship between samples expected to be unrelated — or low kinship between samples expected to be related — indicates a potential sample swap. The `pairs.tsv` output is used as input to MultiQC.
+[somalier relate](https://github.com/brentp/somalier) computes pairwise relatedness (IBS0, IBS2, kinship coefficient) between samples. By default, samples are grouped by subject and compared within each group. When `--cohort` is used, all samples are compared together as a single cohort. High kinship between samples expected to be unrelated — or low kinship between samples expected to be related — indicates a potential sample swap. The `pairs.tsv` output is used as input to MultiQC.
 
 Key columns in `pairs.tsv`:
 
